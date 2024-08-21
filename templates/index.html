@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir archivo Excel</title>
+</head>
+<body>
+    <h1>Subir archivo Excel</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Subir</button>
+    </form>
+
+    {% if head_data is not none %}
+    <h2>Primeros 5 registros del archivo</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for col in head_data.columns %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in head_data.iterrows() %}
+            <tr>
+                {% for val in row[1] %}
+                <td>{{ val }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Gráfico de datos</h2>
+    <img src="{{ url_for('plot_png') }}" alt="Gráfico">
+    {% endif %}
+</body>
+</html>
