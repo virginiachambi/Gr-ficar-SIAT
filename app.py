@@ -2,8 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 import pandas as pd
 import os
 from werkzeug.utils import secure_filename
+import matplotlib
+matplotlib.use('Agg')  # Establecer backend no interactivo para matplotlib
 import matplotlib.pyplot as plt
-import io
 import seaborn as sns
 
 def crear_app():
